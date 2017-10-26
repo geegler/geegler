@@ -1,4 +1,22 @@
 {
-  "name": "geegler/geegler",
-  "description": "Miniature PHP framework"
+  "name": "Geegler Mini PHP Framework",
+  "type": "Application Framework",
+  "description": "Miniature PHP framework",
+  "keywords": ["php", "framework", "light framework", "mini framework"],
+  "homepage": "https://github.com/geegler/geegler",
+  "license": "MIT",
+
+  "require": {
+    "php": ">=5.4.0"
+  },
+
+  "authors": [
+  {
+    
+    "name": "Lorenzo De Leon Alipio"
+  }
+  ],
+
+  
+  "target-dir": ""
 }
