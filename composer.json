@@ -1,5 +1,6 @@
 {
   "name": "Geegler Mini PHP Framework",
+  "version": "1.0.0",
   "type": "Application Framework",
   "description": "Miniature PHP framework",
   "keywords": ["php", "framework", "light framework", "mini framework"],
