@@ -17,8 +17,9 @@ class Router
             static::$routes[$src] = $dest;
         }
     }
-    public static function route($uri)
+    public static function route($src, $uri, $dest = null)
     {
+	self::add($src);
         $qs = '';
         if (static::$allow_query && strpos($uri, '?') !== false) {
             // Break the query string off and attach later
