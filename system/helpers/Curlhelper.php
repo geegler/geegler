@@ -1,6 +1,4 @@
-<?php
-
-namespace System\Helpers\Curl;
+<?php namespace System\Helpers;
 use \cURL;
 
 class CurlHelper
@@ -29,4 +27,7 @@ class CurlHelper
         curl_close($curl);
         return $contents;
     }
+	public static function testCurlHelper(){
+		echo 'This is from '. __CLASS__ .'<br/>';
+	}
 }
