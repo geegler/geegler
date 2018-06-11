@@ -1,6 +1,6 @@
-<?php namespace System\Helpers\Error;
+<?php namespace System\Helpers;
 
-use System\Helpers\Url\UrlHelper;
+use System\Helpers\UrlHelper;
 
 class ErrorHelper
 {
@@ -8,5 +8,10 @@ class ErrorHelper
 	{
 		
 		echo (str_replace('{{ site_url }}', UrlHelper::baseUrl(),file_get_contents(ERROR_PAGE)));
+	}
+	
+	public static function testErrorhelper()
+	{
+		echo 'This is from: '. __CLASS__ .'<br/>';
 	}
 }
