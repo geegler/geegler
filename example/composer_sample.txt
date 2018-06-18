@@ -11,13 +11,7 @@
                                   }
                                 ],
 				"autoload":{
-					"files":[
-                                "app/init.php",
-                                "app/configs/appconstants.php"
-                                
-                                
-                                
-                            ]
+					"files":["app/configs/appconstants.php"]
 							
 				
 				
