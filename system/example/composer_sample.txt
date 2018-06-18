@@ -1,0 +1,28 @@
+{
+       "minimum-stability": "dev",
+                     "require":{
+                               "geegler/geegler": "dev-master",
+                               "tinybutstrong/tinybutstrong": "dev-master"
+ 		                        },
+                "repositories": [
+                                  {
+                                    "type": "vcs",
+                                    "url": "https://github.com/geegler/geegler"
+                                  }
+                                ],
+				"autoload":{
+					"files":[
+                                "app/init.php",
+                                "app/configs/appconstants.php"
+                                
+                                
+                                
+                            ]
+							
+				
+				
+				
+				}
+								
+
+}
