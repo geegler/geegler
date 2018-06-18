@@ -5,7 +5,7 @@ require_once('app/configs/routing.php');
 
 use System\Helpers\UrlHelper;
 //use System\Libraries\Dispatch\Dispatcher;
-use System\Libraries\Route\Router;
+use System\Libraries\Router;
 
 /* we clean the url and make sure it has no extension */
 $clean_url = UrlHelper::cleanUrl();
@@ -29,7 +29,7 @@ if ($app_path !== '/') {
 }
 
 /* we dispatch the request */
-$dispatchObject = new System\Libraries\Dispatch\Dispatcher(Router::route($routes,$request));
+$dispatchObject = new System\Libraries\Dispatcher(Router::route($routes,$request));
     
     
 /* this will serve the user request */
