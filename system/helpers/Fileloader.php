@@ -1,5 +1,6 @@
 <?php
-namespace System\Helpers\FileLoad;
+namespace System\Helpers;
+//namespace System\Helpers\FileLoad;
 
 /**
  * Loader
@@ -11,7 +12,7 @@ namespace System\Helpers\FileLoad;
  * @access public
  */
  
-class Loader
+class FileLoader
 {
     public static function load_config($config_name)
     {

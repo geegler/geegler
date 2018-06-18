@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Libraries\Pager;
+namespace System\Libraries;
 /*
 *
 * filename: PaginationClass.php
@@ -13,7 +13,7 @@ class PaginationClass
 
     //public function __construct($count, $source, $page, $q, $pageName, $page_var, $rows_pp)
 
-    public function __construct($count,  $page_no, $method, $q,$source = null)
+    public function __construct($count, $page_no, $method, $q, $source = null)
     {
 
         $this->v_count = $count;
@@ -28,16 +28,20 @@ class PaginationClass
 
     public function pagenate()
     {
-        if($this->pageName === 'toprated.php') {
+        if ($this->pageName === 'toprated.php')
+        {
             $this->v_q = 'top';
         }
-        if($this->pageName === 'latest.php') {
+        if ($this->pageName === 'latest.php')
+        {
             $this->v_q = 'latest';
         }
-        if($this->pageName === 'mostviewed.php') {
+        if ($this->pageName === 'mostviewed.php')
+        {
             $this->v_q = 'mostviewed';
         }
-        if($this->pageName === 'mostfavored.php') {
+        if ($this->pageName === 'mostfavored.php')
+        {
             $this->v_q = 'mostfavored';
         }
         $qname = $this->v_q;
@@ -45,12 +49,14 @@ class PaginationClass
         $pageit = "";
         $cat = "";
         $this->rows_pp = 24;
-        if($this->v_source == "ph") {
+        if ($this->v_source == "ph")
+        {
             $this->rows_pp = 24;
         }
-        if ($this->v_source == 'yp') {
+        if ($this->v_source == 'yp')
+        {
             $this->rows_pp = 29;
-        } 
+        }
         // find out total pages
         $totalpages = ceil($this->v_count / $this->rows_pp);
         /*
@@ -61,19 +67,23 @@ class PaginationClass
         } 
         */
         //get page from the segment
-        if(isset($this->v_page)) {
+        if (isset($this->v_page))
+        {
             $this->v_page = (int)$this->v_page;
-        } else {
+        } else
+        {
             // default this->v_page num
             $this->v_page = 1;
         } // end if
         // if current page is greater than total pages...
-        if($this->v_page > $totalpages) {
+        if ($this->v_page > $totalpages)
+        {
             // set current page to last page
             $this->v_page = $totalpages;
         } // end if
         // if current page is less than first page...
-        if($this->v_page < 1) {
+        if ($this->v_page < 1)
+        {
             // set current page to first page
             $this->v_page = 1;
         } // end if
@@ -84,7 +94,8 @@ class PaginationClass
         $range = 3;
         // if not on page 1, don't show back links
 
-        if($this->v_page > 1) {
+        if ($this->v_page > 1)
+        {
             // show << link to go back to page 1
             $pageit .= " <a href='" . $this->method . $this->v_q . "/1/'><<</a> ";
             // get previous page num
@@ -95,15 +106,19 @@ class PaginationClass
         } // end if
 
         // loop to show links to range of pages around current page
-        for ($x = ($this->v_page - $range); $x < (($this->v_page + $range) + 1); $x++) {
+        for ($x = ($this->v_page - $range); $x < (($this->v_page + $range) + 1); $x++)
+        {
             // if it's a valid page number...
-            if(($x > 0) && ($x <= $totalpages)) {
+            if (($x > 0) && ($x <= $totalpages))
+            {
                 // if we're on current page...
-                if($x == $this->v_page) {
+                if ($x == $this->v_page)
+                {
                     // 'highlight' it but don't make a link
                     $pageit .= " <span class='current'>$x</span> ";
                     // if not current page...
-                } else {
+                } else
+                {
                     // make it a link
                     $pageit .= " <a href='" . $this->method . $this->v_q . "/" . $x . "/'>" . $x .
                         "</a> ";
@@ -113,7 +128,8 @@ class PaginationClass
 
         } // end for
         // if not on last page, show forward and last page links
-        if($this->v_page != $totalpages) {
+        if ($this->v_page != $totalpages)
+        {
             // get next page
             $nextpage = $this->v_page + 1;
             // echo forward link for next page

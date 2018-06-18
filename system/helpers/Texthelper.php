@@ -2,7 +2,7 @@
 
 namespace System\Helpers;
 
-class Truncate
+class TextHelper
 {
     public static function truncateString($string, $desired_length)
     {

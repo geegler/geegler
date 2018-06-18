@@ -1,7 +1,7 @@
 <?php
 
-namespace System\Helpers\File;
-use System\Helpers\Curl\CurlHelper;
+namespace System\Helpers;
+use System\Helpers\CurlHelper;
 
 /**
  * FileHelper

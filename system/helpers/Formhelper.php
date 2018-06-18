@@ -1,4 +1,5 @@
-<?php namespace System\Helpers\Form;
+<?php namespace System\Helpers;
+if (session_status() === PHP_SESSION_NONE) session_start();
 
 
 class FormHelper
@@ -26,7 +27,7 @@ class FormHelper
 	
 	public function validateToken($current_time, $stored_time, $token_max_life){
 		if(isset($current_time) && isset($stored_time)){
-			$stored_time = explode('___',$stored_time);
+			$stored_time = explode('__',$stored_time);
 			$token_age = trim(base64_decode($stored_time[1]));
 			$token_age = ($current_time - $token_age);
 			return($token_age <= $token_max_life ? True : False );
@@ -40,9 +41,17 @@ class FormHelper
 		$current_time = $time_created = time();
 		$token_max_life = (60 * 30); //30 minutes
 		
-		$token = md5('ewpcnverigAdQrtoijbbnLQXCKFOEIqlpsbnvgr829403rfWFFsdkotw');
-		$token = $token .'___'. base64_encode($time_created);
-		//To do make sure the session is not expire //
+		//$token = md5('ewpcnverigAdQrtoijbbnLQXCKFOEIqlpsbnvgr829403rfWFFsdkotw');
+		if (function_exists('openssl_random_pseudo_bytes')) {
+                $token = base64_encode(openssl_random_pseudo_bytes(25));
+        } else{
+                $token = random_bytes(25);
+    
+        }
+		
+		
+		$token = $token .'__'. base64_encode($time_created);
+		//To do make sure the session is not expired //
 		if(isset($_SESSION['form_submission']) && $_SESSION['form_submission'] === $token && self::validateToken($current_time,$_SESSION['form_submission'], $token_max_life)){
 			
 			$input_token = $_SESSION['form_submission'];
@@ -50,10 +59,12 @@ class FormHelper
 		}else{
 			  $input_token = $token;
 		}
-		   return '<input type="hidden" name="security_token" value ="'.$input_token .'">';
+		   return $input_token;
 	}
 	
-	
+	public function csrfInput(){
+		return '<input type="hidden" name="security_token" value ="'.self::inputProtect() .'">';
+	}
 	public function makeInput($type, $name, $value=null, $attributes = null, $id = null, $class= null, $jqueryvalidation = null)
 	{
 		//return '<input type = "'. $type .'" name ="'. $name .'" >';

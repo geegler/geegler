@@ -1,27 +1,41 @@
-<?php namespace System\Libraries\Dispatch;
+<?php
 
-use System\Helpers\Error\ErrorHelper;
+namespace System\Libraries;
+use Geegler\Helpers\SingletonHelper;
+use System\Helpers\ErrorHelper;
 use \ReflectionClass;
 use \InvalidArgumentException;
 
-class Dispatcher implements DispatcherInterface
+/**
+ * Dispatcher
+ * 
+ * @package geeglernew
+ * @author designer
+ * @copyright 2018
+ * @version $Id$
+ * @access public
+ */
+class Dispatcher implements DispatchInterface
 {
     protected $params = array();
     public function __construct($uri_segments)
     {
         //print_r($uri_segments);
-        
-        
+
+
         @list($controller, $method, $params) = explode('/', $uri_segments, 3);
-        if (isset($controller)) {
+        if (isset($controller))
+        {
             $this->requestedController($controller);
-            
+
         }
-        if (isset($method)) {
+        if (isset($method))
+        {
             $this->requestedMethod($method);
             //echo $method .'<br/>';
         }
-        if (isset($params)) {
+        if (isset($params))
+        {
             $params = array_filter(explode("/", $params));
 
             $this->requestedParams($params);
@@ -33,28 +47,32 @@ class Dispatcher implements DispatcherInterface
     public function requestedController($controller)
     {
 
-        if (file_exists(APPPATH . 'controllers/' . strtolower($controller) . '.php')) {
+        if (file_exists(APPPATH . 'controllers/' . strtolower($controller) . '.php'))
+        {
             require_once (APPPATH . 'controllers/' . strtolower($controller) . '.php');
-            if (!class_exists($controller)) {
+            if (!class_exists($controller))
+            {
                 //throw new InvalidArgumentException("The action controller '$controller' has not been defined.");
-               ErrorHelper::getErrorPage();
-          die();
+                ErrorHelper::getErrorPage();
+                die();
             }
             $this->controller = $controller;
             return $this;
-        }else{
-			ErrorHelper::getErrorPage();
-          die();
-		}
+        } else
+        {
+            ErrorHelper::getErrorPage();
+            die();
+        }
     }
 
     public function requestedMethod($method)
     {
         $reflector = new ReflectionClass($this->controller);
-        if (!$reflector->hasMethod($method)) {
-           // throw new InvalidArgumentException("The controller action '$action' has been not defined.");
-           ErrorHelper::getErrorPage();
-          die();
+        if (!$reflector->hasMethod($method))
+        {
+            // throw new InvalidArgumentException("The controller action '$action' has been not defined.");
+            ErrorHelper::getErrorPage();
+            die();
         }
         $this->method = $method;
         return $this;
@@ -62,18 +80,22 @@ class Dispatcher implements DispatcherInterface
 
     public function requestedParams(array $params)
     {
-       $this->params = $params;
+        $this->params = $params;
         return $this;
     }
 
     public function serveRequest()
     {
-      call_user_func_array(array(new $this->controller, $this->method), $this->params);
+        // call_user_func_array(array(new $this->controller, $this->method), $this->params);
+        //we are suing Singleton for the controller
+        call_user_func_array(array(SingletonHelper::instance($this->controller), $this->
+                method), $this->params);
     }
-    
+
     public static function testDispatcher()
     {
         echo 'this is from dispatcher' . __namespace__ . '<br/>';
+
     }
 
 
