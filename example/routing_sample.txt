@@ -1,0 +1,12 @@
+<?php
+$url = ($_SERVER['REQUEST_URI']);
+
+$routes = array(
+    '' => 'main/getMain/',
+	'main/' => 'main/getMain/',
+	'test/' => 'main/getTest/',
+	'register/' => 'main/getRegistration/',
+	'login/' => 'main/setLogin/',
+	'about/' => 'main/aboutInfo/',
+    
+    );

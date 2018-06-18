@@ -1,0 +1,57 @@
+<?php if(!defined('APPPATH')) exit('No direct script access allowed');
+
+use Geegler\Helpers\SingletonHelper;
+use System\Helpers\UrlHelper;
+
+class Main
+{
+	private $model;
+	private $render;
+	
+	public function __construct(){
+		require_once(MODEL .'main_model.php');
+		//$this->model = new App\Models\Main\MainModel();
+		$this->model = SingletonHelper::instance('App\Models\Main\MainModel');
+		$this->render = SingletonHelper::instance('System\Libraries\GeeglerTbs');//new System\Libraries\Tbs\GeeglerTbs;
+	}
+	
+	public function getMain(){
+		
+		 //echo $this->mdl->getMaindata();
+		//echo 'This is main controller!';
+		if(isset($_SESSION['login_err'])){
+			unset($_SESSION['login_err']);
+		}
+		$content[] = array(
+		'geegler' => $this->model->getMaindata()['header_title'],
+		'para_one' => $this->model->getMaindata()['para_one'],
+		'base_url' => UrlHelper::baseUrl(),
+		'initial_user' => (isset($_SESSION['is_login'])? ucfirst($_SESSION['userName'])[0]  : ucfirst('Guest')[0]),
+		'initial_user_t' =>(isset($_SESSION['is_login'])? 'My Account' : 'Login'),
+		
+		);
+		$this->render->view( $content, 'main');
+	}
+	
+	public function getRegistration(){
+		echo 'this is a generated page without model';
+	
+	}
+	
+	public function setLogin(){
+		echo 'Login Information here';
+	}
+	
+	public function aboutInfo(){
+		echo 'About information here';
+	
+	}
+	
+	public function getTest(){
+	
+		//echo 'This is a Test';
+		echo $this->model->getTestdata();
+	}
+
+
+}

@@ -1,0 +1,36 @@
+<?php namespace App\Models\Main;
+
+
+if(!defined('APPPATH')) exit('No direct script access allowed');
+
+class MainModel
+{
+
+	public function __construct(){
+	
+	
+	
+	}
+	
+	public function getMaindata(){
+		
+		$mData = array(
+						'para_one' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat.',
+						'header_title' => 'Geegler',
+		
+		);
+		
+		return($mData);
+	
+	}
+	
+	public function getTestdata(){
+		
+		return('this is from main model getTestdata method');
+	}
+
+
+
+}
