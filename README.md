@@ -11,7 +11,7 @@ Installation by composer
        		"minimum-stability": "dev",
                      	"require":{
                                	"geegler/geegler": "dev-master",
-                               	"tinybutstrong/tinybutstrong": "dev-master"
+                               	"twig/twig": "^2.0"
  		                 },
                		 "repositories": [
                                   	{
